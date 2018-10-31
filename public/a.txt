@@ -1,0 +1,1 @@
+{"name":"test1","sex":0,"email":"test@qq.com","password":"$2y$10$3z0KUCrp0BTfCkgcgMKZEuZd9UH6CC4.dUpj0eM6r5kyr8Lb8.w4K","active_token":"vvdRf2suhYTsWE6BhzcerGs0WF4v6NXGsKu6IkjNoEyvdVW6guwznqONTxhu","is_active":0,"remember_token":"ts9JoKS7XR","updated_at":"2018-10-27 11:22:57","id":"17"}

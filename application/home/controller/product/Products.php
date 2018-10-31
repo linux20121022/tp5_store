@@ -5,6 +5,6 @@ class Products
 {
     public function index()
     {
-        return 'home/product';
+        $this->fetch('products/show');
     }
 }

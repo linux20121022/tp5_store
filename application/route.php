@@ -12,9 +12,17 @@ use think\Route;
 
 //Route::rule('new/:id','index/Products/index');
 Route::get('products/:id','Products/index');
+//用户
 Route::get('user/login','user.Login/index');
+Route::post('user/login','user.Login/login');
+Route::post('user/logout','user.Login/logout');
+Route::get('user/register','user.Login/register');
+Route::post('user/register','user.Login/postRegister');
+//首页
+
+
 Route::get('order/index','order.Order/index');
-Route::get('product/index','product.Products/index');
+Route::get('products/index','product.Products/index');
 //return [
 //    '__pattern__' => [
 //        'name' => '\w+',

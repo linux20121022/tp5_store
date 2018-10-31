@@ -238,4 +238,14 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+
+    'email' => [
+        'charset'   => 'utf-8',
+        'smtp_debug'   => 0, // 0=关闭 1 = 错误和消息 2 = 消息
+        'smtp_secure' => 'ssl', // 使用安全协议
+        'smtp_host' => 'smtp.126.com',
+        'smtp_post' => 465,
+        'user_name' => 'yuhaiqunyuhaiqun@126.com',
+        'user_password' => 'yuhaiqun1',
+    ],
 ];

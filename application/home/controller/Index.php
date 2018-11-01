@@ -8,10 +8,10 @@ class Index extends Controller
 {
     public function index()
     {
-        $categories = productService::getCategories();
-        $hotProducts = productService::getHotProducts();
-        $latestProducts = productService::getLatestProducts();
-        $users = productService::getUser();
+        $categories = ProductService::getCategories();
+        $hotProducts = ProductService::getHotProducts();
+        $latestProducts = ProductService::getLatestProducts();
+        $users = ProductService::getUser();
         $this->assign('categories', $categories);
         $this->assign('hotProducts', $hotProducts);
         $this->assign('latestProducts', $latestProducts);

@@ -11,7 +11,7 @@
 use think\Route;
 
 //Route::rule('new/:id','index/Products/index');
-Route::get('products/:id','Products/index');
+Route::get('products/:id','product.Products/show');
 //用户
 Route::get('user/login','user.Login/index');
 Route::post('user/login','user.Login/login');
@@ -22,7 +22,7 @@ Route::post('user/register','user.Login/postRegister');
 
 
 Route::get('order/index','order.Order/index');
-Route::get('products/index','product.Products/index');
+//Route::get('products/','product.Products/index');
 //return [
 //    '__pattern__' => [
 //        'name' => '\w+',

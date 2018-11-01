@@ -22,7 +22,7 @@ class Login extends Controller
             $this->error('表单校验失败');
         }
         $param = $request->param();
-        $user = userService::login($param);
+        $user = UserService::login($param);
         if($user) {
             cookie('user_id', $user['id']);
             cookie('user_name', $user['name']);
@@ -75,6 +75,6 @@ class Login extends Controller
             $this->error('表单校验失败');
         }
         $param = $request->param();
-        userService::postRegister($param);
+        UserService::postRegister($param);
     }
 }

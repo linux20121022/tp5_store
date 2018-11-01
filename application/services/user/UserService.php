@@ -12,12 +12,12 @@ use app\model\user\user;
 use think\Config;
 use think\helper\Hash;
 
-class userService extends baseService
+class UserService extends baseService
 {
     public static function login($param)
     {
         $param['hash'] = md5($param['password']);
-        $user = user::get(function($query) use($param){
+        $user = User::get(function($query) use($param){
             $query->where('name', $param['account']);
             $query->where('password', $param['hash']);
             $query->where('is_active', 0);
@@ -27,7 +27,7 @@ class userService extends baseService
 
     public static function postRegister($param)
     {
-        $user = new user();
+        $user = new User();
         $user->name = $param['account'];
         $user->sex = $param['sex'];
         $user->email = $param['email'];

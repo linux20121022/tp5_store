@@ -7,7 +7,7 @@
  */
 namespace app\services;
 
-class baseService
+class BaseService
 {
     public function __construct()
     {

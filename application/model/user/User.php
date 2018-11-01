@@ -10,7 +10,7 @@ namespace app\model\user;
 use PHPMailer\PHPMailer\PHPMailer;
 use think\Config;
 use think\Model;
-class user extends Model
+class User extends Model
 {
     protected $table = 'users';
 

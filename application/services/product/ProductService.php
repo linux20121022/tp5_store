@@ -7,27 +7,27 @@
  */
 namespace app\services\product;
 
-use app\model\product\category;
-use app\model\product\product;
-use app\model\user\user;
-use app\services\baseService;
-class productService extends baseService
+use app\model\product\Category;
+use app\model\product\Product;
+use app\model\user\User;
+use app\services\BaseService;
+class ProductService extends BaseService
 {
     public static function getCategories()
     {
-        $categories = category::all();
+        $categories = Category::all();
         return $categories;
     }
 
     public static function getHotProducts()
     {
-        $hot_product = product::get(['is_hot' => 1]);
+        $hot_product = Product::get(['is_hot' => 1]);
         return $hot_product;
     }
 
     public static function getLatestProducts()
     {
-        $latest_product = product::
+        $latest_product = Product::
         //where('is_hot', '<>', 0)
         where('is_alive', 1)
         ->order('id', 'desc')
@@ -38,6 +38,12 @@ class productService extends baseService
 
     public static function getUser()
     {
-       return user::where('is_active', 1)->select();
+       return User::where('is_active', 1)->select();
+    }
+
+    public static function getProduct($id)
+    {
+        $obj = Product::with(['productImages', 'productAttributes'])->findOrFail($id);
+        return $obj;
     }
 }

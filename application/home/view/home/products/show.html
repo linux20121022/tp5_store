@@ -1,9 +1,7 @@
-@extends('layouts.shop')
-
-
-@section('main')
+{extend  name="layouts/shop" /}
+{block name="content"}
     <div class="listMain">
-        @inject('productPresenter', 'App\Presenters\ProductPresenter')
+        <!--@inject('productPresenter', 'App\Presenters\ProductPresenter')-->
         <!--放大镜-->
 
         <div class="item-inform">
@@ -24,15 +22,15 @@
                         <img src="{{ $productPresenter->getThumbLink($product->thumb) }}" alt="{{ $product->name }}" id="jqzoom" />
                     </div>
                     <ul class="tb-thumb" id="thumblist">
-                        @foreach ($product->productImages as $key => $image)
+                       {volist name="product.productImages" id="image" key="key"}
                             <li class="{{ $key == 0 ? 'tb-selected' : '' }}">
                                 <div class="tb-pic tb-s40">
                                     <a href="javascript:;">
-                                        <img src="{{ $productPresenter->getThumbLink($image->link) }}">
+                                        <img src="{$image->link}">
                                     </a>
                                 </div>
                             </li>
-                        @endforeach
+                        {/volist}
                     </ul>
                 </div>
 
@@ -45,7 +43,7 @@
                 <!--名称-->
                 <div class="tb-detail-hd">
                     <h1>
-                        {{ $product->name }}
+                        {$product->name}
                     </h1>
                 </div>
                 <div class="tb-detail-list">
@@ -53,11 +51,11 @@
                     <div class="tb-detail-price">
                         <li class="price iteminfo_price">
                             <dt>促销价</dt>
-                            <dd><em>¥</em><b class="sys_item_price">{{ $product->price }}</b>  </dd>
+                            <dd><em>¥</em><b class="sys_item_price">{$product->price}</b>  </dd>
                         </li>
                         <li class="price iteminfo_mktprice">
                             <dt>原价</dt>
-                            <dd><em>¥</em><b class="sys_item_mktprice">{{ $product->price_original }}</b></dd>
+                            <dd><em>¥</em><b class="sys_item_mktprice">{$product->price_original}</b></dd>
                         </li>
                         <div class="clear"></div>
                     </div>
@@ -68,15 +66,15 @@
                         <div class="iteminfo_freprice">
                             <div class="am-form-content address">
 
-                                @if (Auth::check())
+                                {if condition="$Think.session.user_id > 0"}
                                     <select data-am-selected name="address_id">
                                         @foreach (Auth::user()->addresses as $address)
                                             <option value="{{ $address->id }}">{{ $address->name }}/{{ $address->phone }}</option>
                                         @endforeach
                                     </select>
-                                @else
+                                {else /}
                                     <a style="line-height:27px;color:red;" href="{{ url('user')  }}">添加收货地址</a>
-                                @endif
+                                {/if}
 
                             </div>
                         </div>
@@ -86,10 +84,10 @@
                     <!--销量-->
                     <ul class="tm-ind-panel">
                         <li class="tm-ind-item tm-ind-sumCount canClick">
-                            <div class="tm-indcon"><span class="tm-label">累计销量</span><span class="tm-count">{{ $product->safe_count }}</span></div>
+                            <div class="tm-indcon"><span class="tm-label">累计销量</span><span class="tm-count">{$product->safe_count}</span></div>
                         </li>
                         <li class="tm-ind-item tm-ind-reviewCount canClick tm-line3">
-                            <div title="滑动到下方收藏的用户查看"  class="tm-indcon"><span class="tm-label">累计收藏</span><span class="tm-count">{{ $collects->count() }}</span></div>
+                            <div title="滑动到下方收藏的用户查看"  class="tm-indcon"><span class="tm-label">累计收藏</span><span class="tm-count"></span></div>
                         </li>
                     </ul>
                     <div class="clear"></div>
@@ -111,16 +109,16 @@
                                     <form class="theme-signin" name="" action="" method="post">
 
                                         <div class="theme-signin-left">
-                                            @foreach ($product->productAttributes()->get()->groupBy('attribute')->toArray() as $item => $attrs)
+                                           {volist name="attribute" id="attrs" key="item"}
                                                 <div class="theme-options">
-                                                    <div class="cart-title">{{ $item }}</div>
+                                                    <div class="cart-title">{$item}</div>
                                                     <ul>
-                                                        @foreach ($attrs as $key => $attr)
-                                                            <li title="价格浮动 {{ $attr['markup'] }}" class="sku-line {{ $key == 0 ? 'selected' : '' }}">{{ $attr['items'] }}<i></i></li>
-                                                        @endforeach
+                                                        {volist name="attrs" id="attr" key="key"}
+                                                            <li title="价格浮动 {$attr['markup']}" class="sku-line {{ $key == 0 ? 'selected' : '' }}">{$attr['items']}<i></i></li>
+                                                        {/volist}
                                                     </ul>
                                                 </div>
-                                            @endforeach
+                                            {/volist}
                                             <div class="theme-options">
                                                 <div class="cart-title number">数量</div>
                         <dd>
@@ -205,22 +203,22 @@
                         <h2>推荐</h2>
                     </div>
 
-                    @foreach ($recommendProducts as $recommendProduct)
+                    <!--foreach ($recommendProducts as $recommendProduct)-->
                         <li class="first">
                             <div class="p-img">
-                                <a href="{{ url("/home/products/{$recommendProduct->id}") }}">
+                                <a href="/home/products/">
                                     <img class="media-object" src="{{ $productPresenter->getThumbLink($recommendProduct->thumb) }}" alt="{{ $recommendProduct->name }}" width="80">
                                 </a>
                             </div>
-                            <div class="p-name"><a href="{{ url("/home/products/{$recommendProduct->id}") }}">
-                                    {{ $recommendProduct->name }}
+                            <div class="p-name"><a href="/home/products/">
+                                    <!--{{ recommendProduct->name }}-->
                                 </a>
                             </div>
                             <div class="p-price"><strong>
-                                    ￥ {{ $recommendProduct->price }}
+                                    <!--￥ {{ recommendProduct->price }}-->
                                 </strong></div>
                         </li>
-                    @endforeach
+                    <!--endforeach-->
 
                 </ul>
             </div>
@@ -261,24 +259,24 @@
                     <div class="am-tab-panel am-fade">
 
                         <ul class="am-comments-list am-comments-list-flip">
-                            @inject('userPresenter', 'App\Presenters\UserPresenter')
-                            @foreach ($collects as $user)
+                            <!--inject('userPresenter', 'App\Presenters\UserPresenter')-->
+                            <!--foreach ($collects as $user)-->
                                 <li class="am-comment">
                                     <a href="">
-                                        <img class="am-comment-avatar" src="{{ $userPresenter->getThumbLink($user->avatar) }}" alt="{{ $user->name }}" />
+                                        <img class="am-comment-avatar" src="" alt="user->name" />
                                     </a>
 
                                     <div class="am-comment-main">
                                         <header class="am-comment-hd">
                                             <div class="am-comment-meta">
-                                                <a href="#link-to-user" class="am-comment-author">{{ $user->name }}</a>
+                                                <a href="#link-to-user" class="am-comment-author">user->name</a>
                                             </div>
                                         </header>
 
                                         <!-- 评论内容 -->
                                     </div>
                                 </li>
-                            @endforeach
+                            <!--endforeach-->
                         </ul>
 
                         <div class="clear"></div>
@@ -308,18 +306,18 @@
                         <a href="#">物流</a>
                     </p>
                 </div>
-                @include('common.home.footer')
+                {include file="common/footer" /}
             </div>
         </div>
 
     </div>
     </div>
     <form id="pay_form" action="{{ url('/user/pay/show') }}" method="post">
-        {{ csrf_field() }}
+        {:token()}
     </form>
 @endsection
 
-@section('script')
+
     <script src="{{ asset('assets/user/layer/2.4/layer.js') }}"></script>
     <script src="{{ asset('js/jquery-addShopping.js') }}"></script>
     <script>
@@ -419,4 +417,4 @@
             form.submit();
         });
     </script>
-@endsection
+{/block}

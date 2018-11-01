@@ -8,7 +8,7 @@
 namespace app\model\product;
 
 use think\Model;
-class product extends Model
+class ProductImages extends Model
 {
-    protected $table = 'products';
+    protected $table = 'product_images';
 }

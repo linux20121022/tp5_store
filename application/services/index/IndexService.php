@@ -8,7 +8,7 @@
 namespace app\services\index;
 
 use app\services\baseService;
-class indexService extends baseService
+class IndexService extends baseService
 {
     public static function getIndex()
     {

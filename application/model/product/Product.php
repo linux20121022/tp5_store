@@ -21,4 +21,14 @@ class Product extends Model
     {
         return $this->hasMany('productAttributes');
     }
+
+    public function productDetail()
+    {
+        return $this->hasOne('ProductDetail');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('LikeProducts');
+    }
 }
